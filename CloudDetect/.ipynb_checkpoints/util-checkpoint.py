@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
+from sklearn.metrics import f1_score, precision_score, recall_score, balanced_accuracy_score
 
 def read_off(file):
     off_header = file.readline().strip()
@@ -22,3 +23,11 @@ def visualise(vert):
                                                 'line':{'width':2,'color':'DarkSlateGrey'}})])
     fig.show()
     return fig
+
+def get_metrics(y_true, y_pred):
+    return {
+        'f1_score':f1_score(y_true, y_pred, average='macro',zero_division = 0),
+        'precision':precision_score(y_true, y_pred, average='macro',zero_division = 0),
+        'recall':recall_score(y_true, y_pred, average='macro',zero_division = 0),
+        'balanced_acc':balanced_accuracy_score(y_true, y_pred),
+    }
