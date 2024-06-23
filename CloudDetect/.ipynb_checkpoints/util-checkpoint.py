@@ -25,6 +25,8 @@ def visualise(vert):
     return fig
 
 def get_metrics(y_true, y_pred):
+    y_true = y_true.cpu()
+    y_pred = y_pred.cpu()
     return {
         'f1_score':f1_score(y_true, y_pred, average='macro',zero_division = 0),
         'precision':precision_score(y_true, y_pred, average='macro',zero_division = 0),
