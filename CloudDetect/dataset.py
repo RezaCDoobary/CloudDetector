@@ -3,12 +3,13 @@ from torch.utils.data import Dataset, DataLoader
 from .util import read_off
 
 class CloudDataset(Dataset):
-    def __init__(self, metadata, preprocessor, root, class_mapper, one_hot = False):
+    def __init__(self, metadata, preprocessor, root, class_mapper, device, one_hot = False):
         self.metadata = metadata
         self.preprocessor = preprocessor
         self.root = root
         self.class_mapper = class_mapper
         self.one_hot = one_hot
+        self.device = device
         
     def __len__(self):
         return len(self.metadata)

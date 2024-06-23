@@ -8,18 +8,20 @@ class training(object):
                  optimiser, 
                  model,
                 train_loader,
-                val_loader):
+                val_loader,
+                device):
         self.loss_fn = loss_fn
         self.optimiser = optimiser
         self.model = model
         self.train_loader = train_loader
         self.val_loader = val_loader
         self.log = {}
+        self.device = device
 
     def load_data(self, data):
         X,y = data['data'], data['category']
         X = torch.transpose(X.float(),1,2)
-        return X, y
+        return X.to(self.device), y.to(self.device)
     
     def perform_optimisation(self,X, y):
         self.optimiser.zero_grad()
